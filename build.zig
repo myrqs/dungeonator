@@ -22,6 +22,7 @@ pub fn build(b: *std.Build) void {
     lib.linkLibC();
     lib.installHeadersDirectory(b.path("src"), "dungeonator", .{ .include_extensions = &.{".h"} });
     lib.linkLibrary(pcg_basic_dep.artifact("pcg_basic"));
+    lib.installLibraryHeaders(pcg_basic_dep.artifact("pcg_basic"));
 
     b.installArtifact(lib);
 }
