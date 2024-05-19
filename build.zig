@@ -16,13 +16,12 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
         .target = target,
     });
-    lib.addIncludePath(pcg_basic_dep.path("."));
 
     lib.addCSourceFiles(.{ .files = &generic_src_files });
     lib.linkLibC();
+    lib.installLibraryHeaders(pcg_basic_dep.artifact("pcg_basic"));
     lib.installHeadersDirectory(b.path("src"), "dungeonator", .{ .include_extensions = &.{".h"} });
     lib.linkLibrary(pcg_basic_dep.artifact("pcg_basic"));
-    lib.installLibraryHeaders(pcg_basic_dep.artifact("pcg_basic"));
 
     b.installArtifact(lib);
 }
