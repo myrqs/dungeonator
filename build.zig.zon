@@ -1,0 +1,11 @@
+.{ .name = "dungeonator", .version = "1.0.0", .dependencies = .{ .pcg_basic = .{
+    .url = "https://github.com/myrqs/pcg-c-basic/archive/refs/heads/master.tar.gz",
+    .hash = "122047516f2b81b046b0a7de8edec36e7355518ab27e9db628498bf80132029f9506",
+} }, .paths = .{
+    "LICENSE",
+    "README.md",
+    "build.zig",
+    "build.zig.zon",
+    "include",
+    "src",
+} }

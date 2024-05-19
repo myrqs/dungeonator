@@ -342,3 +342,11 @@ healthchecksdb
 # CMake build files
 out/
 build/
+
+# Zig programming language
+
+zig-cache/
+zig-out/
+build/
+build-*/
+docgen_tmp/
