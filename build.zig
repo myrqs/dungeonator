@@ -19,6 +19,21 @@ pub fn build(b: *std.Build) void {
 
     lib.addCSourceFiles(.{ .files = &generic_src_files });
     lib.linkLibC();
+
+    if (target.result.os.tag == .emscripten) {
+        if (b.sysroot == null) {
+            @panic("Pass '--sysroot \"$EMSDK/upstream/emscripten\"'");
+        }
+
+        const cache_include = std.fs.path.join(b.allocator, &.{ b.sysroot.?, "cache", "sysroot", "include" }) catch @panic("Out of memory");
+        defer b.allocator.free(cache_include);
+
+        var dir = std.fs.openDirAbsolute(cache_include, std.fs.Dir.OpenDirOptions{ .access_sub_paths = true, .no_follow = true }) catch @panic("No emscripten cache. Generate it!");
+        dir.close();
+
+        lib.addIncludePath(.{ .path = cache_include });
+    }
+
     lib.installLibraryHeaders(pcg_basic_dep.artifact("pcg_basic"));
     lib.installHeadersDirectory(b.path("src"), "dungeonator", .{ .include_extensions = &.{".h"} });
     lib.linkLibrary(pcg_basic_dep.artifact("pcg_basic"));
