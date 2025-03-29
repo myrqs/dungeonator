@@ -1,4 +1,4 @@
-.{ .name = "dungeonator", .version = "1.0.0", .dependencies = .{ .pcg_basic = .{
+.{ .name = .dungeonator, .version = "1.0.0", .fingerprint = 0x5f47c96d9a4242f5, .dependencies = .{ .pcg_basic = .{
     .url = "https://github.com/myrqs/pcg-c-basic/archive/refs/heads/master.tar.gz",
     .hash = "1220b496988b3bc05cdd2c886a2d2b24f9f1406d314131cb0f24dedb320e9de8711c",
 } }, .paths = .{
