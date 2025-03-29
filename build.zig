@@ -10,7 +10,7 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    lib.addIncludePath(.{ .path = "include" });
+    lib.addIncludePath(b.path("include"));
 
     const pcg_basic_dep = b.dependency("pcg_basic", .{
         .optimize = optimize,
@@ -31,7 +31,7 @@ pub fn build(b: *std.Build) void {
         var dir = std.fs.openDirAbsolute(cache_include, std.fs.Dir.OpenDirOptions{ .access_sub_paths = true, .no_follow = true }) catch @panic("No emscripten cache. Generate it!");
         dir.close();
 
-        lib.addIncludePath(.{ .path = cache_include });
+        lib.addIncludePath(b.path(cache_include));
     }
 
     lib.installLibraryHeaders(pcg_basic_dep.artifact("pcg_basic"));
